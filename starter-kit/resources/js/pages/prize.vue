@@ -190,6 +190,12 @@
 <script setup>
 import { ref, onMounted, nextTick, computed } from 'vue'
 import axios from 'axios'
+definePage({
+  meta: {
+    requiresAuth: true,
+    role: 'store',
+  },
+})
 
 // ======= Mock Data =======
 const mockRewards = [

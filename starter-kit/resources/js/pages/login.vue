@@ -3,6 +3,9 @@ import AuthProvider from '@/views/pages/authentication/AuthProvider.vue'
 import { VNodeRenderer } from '@layouts/components/VNodeRenderer'
 import { themeConfig } from '@themeConfig'
 import authV2LoginIllustration from '@images/pages/auth-v2-login-illustration.png'
+import { useApi } from '@/composables/useApi'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 definePage({
   meta: {
@@ -18,6 +21,24 @@ const form = ref({
 })
 
 const isPasswordVisible = ref(false)
+
+const api = useApi()
+const authStore = useAuthStore()
+const router = useRouter()
+
+async function handleLogin() {
+  const { data } = await api('/login', {
+    method: 'POST',
+    body: { email: form.email, password: form.password },
+  })
+
+  if (data?.success) {
+    authStore.setUser(data.user)
+    router.push({ name: 'second-page' })
+  } else {
+    alert(data?.message || 'Login failed')
+  }
+}
 </script>
 
 <template>
@@ -70,7 +91,7 @@ const isPasswordVisible = ref(false)
           </p>
         </VCardText>
         <VCardText>
-          <VForm @submit.prevent="() => {}">
+          <VForm @submit.prevent="handleLogin">
             <VRow>
               <!-- email -->
               <VCol cols="12">

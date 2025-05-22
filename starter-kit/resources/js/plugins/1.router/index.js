@@ -1,5 +1,6 @@
 import { setupLayouts } from 'virtual:generated-layouts'
 import { createRouter, createWebHistory } from 'vue-router/auto'
+import { useAuthStore } from '@/stores/auth'
 
 function recursiveLayouts(route) {
   if (route.children) {
@@ -23,6 +24,20 @@ const router = createRouter({
   extendRoutes: pages => [
     ...[...pages].map(route => recursiveLayouts(route)),
   ],
+})
+
+router.beforeEach((to, _, next) => {
+  const auth = useAuthStore()
+  const requiresAuth = to.meta?.requiresAuth
+  const role = to.meta?.role
+
+  if (requiresAuth && !auth.role.value)
+    return next({ name: 'login' })
+
+  if (role && auth.role.value !== role)
+    return next(false)
+
+  next()
 })
 
 export { router }

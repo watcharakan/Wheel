@@ -276,6 +276,12 @@
 import { ref, reactive, computed } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+definePage({
+  meta: {
+    requiresAuth: true,
+    role: 'store',
+  },
+})
 
 // Stepper items
 const iconsSteps = [
