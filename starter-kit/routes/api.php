@@ -6,6 +6,8 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CampaignController;
+use App\Http\Controllers\RewardController;
 
 // Resource หลัก
 Route::middleware('role:store')->group(function () {
@@ -31,6 +33,10 @@ Route::middleware('role:store')->group(function () {
 
     // *** ส่งผลลัพธ์ Quiz (เก็บ styles, types, quiz_link และ +1 quiz_attempts) ***
     Route::post('quiz-users/submit-quiz', [QuizUserController::class, 'submitQuizResult']);
+
+    // สร้างแคมเปญและรางวัล
+    Route::post('campaigns', [CampaignController::class, 'store']);
+    Route::post('campaigns/{campaign}/rewards', [RewardController::class, 'store']);
 });
 
 // Resource อื่น ๆ สำหรับผู้ดูแลระบบ
