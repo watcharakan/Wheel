@@ -5,6 +5,9 @@ use App\Http\Controllers\QuizUserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RewardController;
 
 // Resource หลัก
 Route::resource('quiz-users', QuizUserController::class)->only([
@@ -33,6 +36,9 @@ Route::post('quiz-users/submit-quiz', [QuizUserController::class, 'submitQuizRes
 // Resource อื่น ๆ
 Route::apiResource('coupons', CouponController::class);
 Route::apiResource('packages', PackageController::class);
+Route::apiResource('stores', StoreController::class);
+Route::apiResource('projects', ProjectController::class);
+Route::apiResource('rewards', RewardController::class);
 
 // ตัวอย่าง Payment
 Route::post('/create-promptpay-intent', [PaymentController::class, 'createPromptpayIntent']);
