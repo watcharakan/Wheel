@@ -5,7 +5,13 @@ use App\Http\Controllers\QuizUserController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\PaymentController;
+
+use App\Http\Controllers\StoreController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RewardController;
+
 use App\Http\Controllers\AuthController;
+
 
 // Resource หลัก
 Route::middleware('role:store')->group(function () {
@@ -33,11 +39,12 @@ Route::middleware('role:store')->group(function () {
     Route::post('quiz-users/submit-quiz', [QuizUserController::class, 'submitQuizResult']);
 });
 
-// Resource อื่น ๆ สำหรับผู้ดูแลระบบ
-Route::middleware('role:admin')->group(function () {
-    Route::apiResource('coupons', CouponController::class);
-    Route::apiResource('packages', PackageController::class);
-});
+
+Route::apiResource('coupons', CouponController::class);
+Route::apiResource('packages', PackageController::class);
+Route::apiResource('stores', StoreController::class);
+Route::apiResource('projects', ProjectController::class);
+Route::apiResource('rewards', RewardController::class);
 
 // ตัวอย่าง Payment
 Route::post('/create-promptpay-intent', [PaymentController::class, 'createPromptpayIntent']);
