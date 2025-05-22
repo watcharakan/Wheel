@@ -1,5 +1,6 @@
 <script setup>
-import navItems from '@/navigation/vertical'
+import useNavItems from '@/navigation/vertical'
+import { computed } from 'vue'
 import { themeConfig } from '@themeConfig'
 
 // Components
@@ -13,6 +14,7 @@ import { useConfigStore } from '@/@core/stores/config'
 import { VerticalNavLayout } from '@layouts'
 
 const configStore = useConfigStore()
+const navItems = computed(() => useNavItems())
 
 // ℹ️ Provide animation name for vertical nav collapse icon.
 const verticalNavHeaderActionAnimationName = ref(null)
