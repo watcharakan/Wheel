@@ -108,6 +108,12 @@
 <script setup>
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
+definePage({
+  meta: {
+    requiresAuth: true,
+    role: 'admin',
+  },
+})
 
 // กรณีใช้ Laravel Sanctum + SPA ให้ปลดคอมเมนต์ถ้าจำเป็น
 // axios.defaults.withCredentials = true

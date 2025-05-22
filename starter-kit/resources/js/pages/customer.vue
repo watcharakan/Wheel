@@ -215,6 +215,12 @@
 <script setup>
 import axios from 'axios'
 import { computed, onMounted, ref } from 'vue'
+definePage({
+  meta: {
+    requiresAuth: true,
+    role: 'store',
+  },
+})
 import {
   VAvatar,
   VBtn,

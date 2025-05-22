@@ -1,10 +1,12 @@
-export default [
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
+
+const storeNav = [
   {
     title: 'Home',
     to: { name: 'second-page' },
     icon: { icon: 'bx-home-alt' },
   },
- 
   {
     title: 'Project',
     to: { name: 'project' },
@@ -20,8 +22,9 @@ export default [
     to: { name: 'prize' },
     icon: { icon: 'bx-receipt' },
   },
- 
- 
+]
+
+const adminExtra = [
   {
     title: 'Package Management',
     to: { name: 'packagemanagement' },
@@ -33,3 +36,8 @@ export default [
     icon: { icon: 'bx-user' },
   },
 ]
+
+export default function useVerticalNavigation() {
+  const { role } = storeToRefs(useAuthStore())
+  return role.value === 'admin' ? [...storeNav, ...adminExtra] : storeNav
+}
