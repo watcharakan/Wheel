@@ -8,13 +8,13 @@
         <!-- รายละเอียดย่อย -->
         <p class="text-subtitle-1">A2L Back To School</p>
         <!-- ปุ่ม Event -->
-        <v-btn
-          variant="text"
-          @click="goToEventDetail"
-          class="px-0"
-        >
-          Event
-        </v-btn>
+          <v-btn
+            variant="text"
+            @click="goToEventDetail"
+            class="px-0"
+          >
+            {{ t('event') }}
+          </v-btn>
       </v-col>
 
       <!-- การ์ดสรุปจำนวนผู้เข้าร่วม / ของขวัญ -->
@@ -22,7 +22,7 @@
         <v-row>
           <v-col cols="12" sm="6" md="12" class="mb-2">
             <v-card class="pa-2 d-flex flex-column align-center">
-              <div class="text-h6 mb-2">จำนวนผู้เข้าร่วมงาน</div>
+                <div class="text-h6 mb-2">{{ t('participantsTitle') }}</div>
               <div class="text-h5 d-flex align-center">
                 <span>{{ participants }}</span>
                 <span class="text-success text-subtitle-2 ml-2">+100%</span>
@@ -32,7 +32,7 @@
 
           <v-col cols="12" sm="6" md="12">
             <v-card class="pa-2 d-flex flex-column align-center">
-              <div class="text-h6 mb-2">จำนวนของขวัญ</div>
+                <div class="text-h6 mb-2">{{ t('giftsTitle') }}</div>
               <div class="text-h5 d-flex align-center">
                 <span>{{ gifts }}</span>
                 <span class="text-success text-subtitle-2 ml-2">+100%</span>
@@ -48,28 +48,28 @@
       <v-col cols="12" md="6">
         <v-card class="mb-4">
           <v-card-title class="text-h6">
-            ผู้เข้าร่วมงาน
+            {{ t('participants') }}
           </v-card-title>
           <v-card-text>
-            <v-text-field
-              v-model="firstRowInput"
-              label="แถวกั้นอันแรก"
-              type="number"
-            ></v-text-field>
+              <v-text-field
+                v-model="firstRowInput"
+                :label="t('firstRowBarrier')"
+                type="number"
+              ></v-text-field>
           </v-card-text>
         </v-card>
       </v-col>
 
       <v-col cols="12" md="6">
         <v-card class="mb-4 d-flex flex-column align-center justify-center" style="min-height: 160px;">
-          <v-card-title class="text-h6">สุ่มรางวัล</v-card-title>
+          <v-card-title class="text-h6">{{ t('randomReward') }}</v-card-title>
           <v-card-text>
-            <v-btn
-              color="primary"
-              @click="handleRandomGift"
-            >
-              คลิกสุ่ม
-            </v-btn>
+              <v-btn
+                color="primary"
+                @click="handleRandomGift"
+              >
+                {{ t('clickRandom') }}
+              </v-btn>
           </v-card-text>
         </v-card>
       </v-col>
@@ -78,8 +78,13 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n'
 export default {
   name: 'EventPage',
+  setup() {
+    const { t } = useI18n()
+    return { t }
+  },
   data() {
     return {
       participants: 61,
