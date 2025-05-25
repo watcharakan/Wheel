@@ -88,6 +88,9 @@
                   v-model="project.themeColor"
                   hide-inputs
                   dot-size="18"
+                  show-swatches
+                  :swatches="colorSwatches"
+                  swatches-per-row="5"
                 />
               </div>
               <div style="min-inline-size:220px;">
@@ -96,6 +99,9 @@
                   v-model="project.textColor"
                   hide-inputs
                   dot-size="18"
+                  show-swatches
+                  :swatches="colorSwatches"
+                  swatches-per-row="5"
                 />
               </div>
             </div>
@@ -291,6 +297,20 @@ const iconsSteps = [
 ]
 const currentStep = ref(0)
 const router = useRouter()
+
+// Preset colors for color pickers
+const colorSwatches = [
+  '#000000',
+  '#FFFFFF',
+  '#FF5252',
+  '#FF4081',
+  '#9C27B0',
+  '#673AB7',
+  '#3F51B5',
+  '#2196F3',
+  '#4CAF50',
+  '#FFC107',
+]
 
 // STEP 0 (mockup)
 const GOOGLE_API_KEY = import.meta.env.VITE_GOOGLE_API_KEY
